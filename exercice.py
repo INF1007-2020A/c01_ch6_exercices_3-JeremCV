@@ -3,6 +3,7 @@
 
 from random import randint
 from structs import Queue, Stack
+from collections import deque
 
 
 def reverse_data(data: list = None):
@@ -11,16 +12,27 @@ def reverse_data(data: list = None):
     # et les retourner en ordre inverse, sans utiliser de liste.
 
     if data is None:
+        data = [input("Entrez une valeur:") for _ in range(10)]
         pass  # Demander les valeurs ici
-
-    reversed_data = None  # Stocker le résultat ici
-
-    return reversed_data
+    s = Stack()
+    s.put_many(data)
+    
+    #reversed_data = Queue(len(data))  # Stocker le résultat ici
+    #for x in range(len(data)-1 , -1 , -1):
+    #    reversed_data.append(data[x])
+    return [s.get() for _ in range(len(s))]
 
 
 def delete_nth_from_stack(data: Stack, position: int) -> Stack:
     # TODO: Supprimer le énième (position) élément de data et retourner la nouvelle structure de données.
-    return Stack()
+    s = Stack()
+
+    for i in range(len(data)):
+        if i == len(data) - position:
+            data.get()
+        s.put(data.get())
+    
+    return [s.get() for _ in range(len(s))]
 
 
 def delete_nth_from_queue(data: Queue, position: int) -> Queue:
@@ -30,7 +42,13 @@ def delete_nth_from_queue(data: Queue, position: int) -> Queue:
 
 def sort_stack(data: Stack) -> Stack:
     # TODO: Retourner la séquence triée
-    return Stack()
+    values = []
+    for _ in range(len(data)):
+        values.append(data.get(1))
+
+    data.put_many(sorted(values))
+
+    return data
 
 
 def sort_queue(data: Queue) -> Queue:
@@ -64,7 +82,7 @@ def main() -> None:
 
     lifo = Stack()
     lifo.put_many([randint(0, 1000) for _ in range(20)])
-    print(f"On ordonne une file: {sort_queue(lifo)}")
+    print(f"On ordonne une pile: {sort_stack(lifo)}")
 
     fifo = Queue()
     fifo.put_many([randint(0, 1000) for _ in range(20)])
